@@ -4,12 +4,14 @@ import { HttpClientModule } from  '@angular/common/http';
 import { MatToolbarModule } from  '@angular/material/toolbar';
 import { MatCardModule } from  '@angular/material/card';
 import { MatButtonModule } from  '@angular/material/button';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { PushNotificationService } from './push-notification.service';
 
 @NgModule({
   declarations: [
@@ -18,10 +20,10 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule,FormsModule,
     HttpClientModule,MatToolbarModule,MatCardModule,MatButtonModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [PushNotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

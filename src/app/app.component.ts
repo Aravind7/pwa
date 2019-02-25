@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,EventEmitter,  Output } from '@angular/core';
 import { ApiService } from  './api.service';
 import { Item } from  './api.service';
+
+import { PushNotificationService } from './push-notification.service';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +14,12 @@ export class AppComponent implements  OnInit{
   title = 'pwa';
   items:  Array<Item>;
 
-  constructor(private  apiService:  ApiService){
+  constructor(private  apiService:  ApiService,private pushservice: PushNotificationService){
   }
 
   ngOnInit(){
     this.fetchData();
+    this.notify();
     }
 
     fetchData(){
@@ -27,4 +30,15 @@ export class AppComponent implements  OnInit{
       console.log(err);
       });
       }
+
+      notify() {
+        let data: Array < any >= [];
+        data.push({
+            "title": "Approval",
+            "alertContent": "This is First Alert -- By Debasis Saha"
+        });
+
+        this.pushservice.generateNotification(data);
+
+}
 }
